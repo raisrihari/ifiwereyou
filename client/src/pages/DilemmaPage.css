@@ -1,0 +1,832 @@
+/* In DilemmaPage.css */
+body, html, .dilemma-header h1, .story-body p, .metadata, .perspectives-title {
+    font-family: 'American Typewriter', 'Georgia', serif;
+}
+/* --- The Main Layout Grid --- */
+.dilemma-page-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+    grid-template-areas:
+        "content sidebar"
+        "perspectives perspectives";
+    gap: 4rem;
+    padding: 2rem 0;
+}
+
+.dilemma-content { grid-area: content; }
+.dilemma-sidebar { grid-area: sidebar; }
+.perspectives-section { grid-area: perspectives; }
+
+/* --- Article Content Styling --- */
+.dilemma-header {
+    margin-bottom: 2.5rem;
+}
+.dilemma-header h1 {
+    font-size: 2.25rem;
+    text-align: left;
+    line-height: 1.2;
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+.metadata {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+.metadata-link {
+    color: var(--color-accent-cyan);
+    font-weight: 500;
+}
+.story-body p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--color-text-primary);
+    margin-bottom: 1.75rem;
+}
+
+/* --- Content Actions Styling --- */
+.content-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.content-actions .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background-color: var(--color-button-secondary);
+    color: var(--color-button-text-secondary);
+}
+
+.content-actions .action-btn:hover {
+    background-color: var(--color-button-secondary-hover);
+    box-shadow: var(--shadow-sm);
+}
+
+.content-actions .edit-btn {
+    color: var(--color-accent-cyan);
+    border-color: var(--color-accent-cyan);
+    background: transparent;
+}
+.content-actions .edit-btn:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+}
+
+.content-actions .delete-btn {
+    color: var(--color-delete-button-text);
+    border-color: var(--color-delete-button-border);
+    background: var(--color-delete-button-bg);
+}
+
+.content-actions .delete-btn:hover {
+    background-color: var(--color-delete-button-hover-bg);
+    color: var(--color-delete-button-hover-text);
+}
+
+/* NEW: Styles for the Dilemma Edit Form */
+.dilemma-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem; /* Space below actions */
+}
+
+.dilemma-edit-form input[type="text"],
+.dilemma-edit-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background-color: var(--color-bg); /* Match main page background */
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    transition: all 0.2s ease;
+}
+
+.dilemma-edit-form input[type="text"]:focus,
+.dilemma-edit-form textarea:focus {
+    outline: none;
+    border-color: var(--color-accent-cyan);
+    background-color: var(--color-surface);
+}
+
+.dilemma-edit-form textarea {
+    min-height: 200px; /* More height for dilemma story */
+    resize: vertical;
+}
+
+.dilemma-edit-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+}
+
+.dilemma-edit-actions button {
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.dilemma-edit-actions .btn-cancel {
+    background: transparent;
+    color: var(--color-text-secondary);
+}
+
+.dilemma-edit-actions .btn-cancel:hover {
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+}
+
+.dilemma-edit-actions .btn-save {
+    background: var(--color-accent-blue); /* Using accent blue for dilemma save */
+    border-color: var(--color-accent-blue);
+    color: var(--color-dark);
+    font-weight: 700;
+}
+
+.dilemma-edit-actions .btn-save:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+/* --- Sidebar Styling --- */
+.sidebar-box {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 2.5rem;
+}
+.sidebar-title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-secondary);
+    margin: 0 0 1.25rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+}
+.categories-container, .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+/* --- Tags & Categories --- */
+.category-tag, .tag {
+    display: inline-block;
+    border: 1px solid;
+    overflow: hidden;
+    position: relative;
+    color: var(--color-text-secondary);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.category-tag span, .tag span {
+    position: relative;
+    z-index: 20;
+}
+
+.category-tag::after, .tag::after {
+    background: #fff;
+    content: "";
+    height: 155px;
+    left: -75px;
+    opacity: 0.2;
+    position: absolute;
+    top: -50px;
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 50px;
+    z-index: -10;
+}
+
+.category-tag:hover, .tag:hover {
+    color: white;
+    background-color: #4F95DA;
+    border-color: #4F95DA;
+}
+
+.category-tag:hover::after, .tag:hover::after {
+    left: 120%;
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* --- Perspectives Section --- */
+.perspectives-section {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 2px solid var(--color-border);
+}
+.perspectives-title {
+    font-size: 1.75rem;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+.perspective-form textarea {
+    width: 100%;
+    min-height: 120px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1rem;
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    resize: vertical;
+}
+.perspective-form textarea:focus {
+    outline: none;
+    border-color: var(--color-accent-cyan);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+/* --- Submit Button (Animated Line Box) --- */
+.animated-line-box {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    padding: 0;
+    background: transparent;
+    width: 180px;
+    height: 60px;
+}
+
+.animated-line-box svg {
+    border: 0 solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+    outline: 0.5px solid;
+    outline-color: rgba(82, 73, 73, 0.5);
+    outline-offset: 0px;
+    text-shadow: none;
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.animated-line-box:hover svg {
+    border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388;
+}
+
+.animated-line-box span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+    transition: color 0.3s ease;
+}
+
+.animated-line-box:hover span {
+    color: #ffffff;
+}
+
+/* --- Glow on Hover Button --- */
+.glow-on-hover {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--color-border);
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000;
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* --- Perspectives List --- */
+.perspectives-list {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.perspective-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 1.5rem;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Added transition */
+}
+
+/* This class is added to the whole card when editing */
+.perspective-card.is-editing {
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+}
+
+.perspective-text {
+    margin: 0;
+    white-space: pre-wrap; /* This respects line breaks in the text */
+    line-height: 1.7;
+    color: var(--color-text-primary); /* Ensure consistent text color */
+}
+
+.perspective-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+/* --- Login Prompt --- */
+.login-prompt {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--color-surface);
+    border: 1px dashed var(--color-border);
+    border-radius: 8px;
+}
+.login-prompt p { margin: 0; font-weight: 500; color: var(--color-text-secondary); }
+.login-prompt a { color: var(--color-accent-cyan); font-weight: 700; }
+
+/* --- Interaction Button --- */
+.interaction-btn {
+    width: 100%;
+    text-align: center;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.75rem;
+    border-radius: 8px;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.interaction-btn:hover {
+    background-color: #2e2e2e;
+    border-color: var(--color-accent-cyan);
+}
+.interaction-btn.marked-interesting {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* --- Perspective Actions --- */
+.perspective-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+.action-btn:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-surface);
+}
+/* --- Silver Medal: Best Button and Best Perspective --- */
+.best-btn {
+    color: var(--color-accent-silver); /* Silver color */
+}
+
+.best-perspective {
+    border-color: var(--color-accent-silver);
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.3); /* Silver glow */
+}
+
+/* Enhanced style when best-btn is active */
+.action-btn.best-btn.active {
+    color: var(--color-accent-silver);
+    background-color: rgba(192, 192, 192, 0.1); /* Light silver background */
+    border-color: var(--color-accent-silver);
+    animation: silverPulse 2s ease-in-out infinite alternate; /* New animation */
+    box-shadow: 0 0 15px rgba(192, 192, 192, 0.5); /* Stronger silver glow */
+}
+
+.action-btn.best-btn.active svg {
+    fill: var(--color-accent-silver);
+    filter: drop-shadow(0 0 8px var(--color-accent-silver));
+}
+
+@keyframes silverPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(192, 192, 192, 0.5);
+    }
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 0 25px rgba(192, 192, 192, 0.7);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(192, 192, 192, 0.5);
+    }
+}
+
+/* --- Golden Star: Star Button Styling --- */
+.star-btn {
+    position: relative;
+    overflow: visible;
+}
+
+.star-btn.starred {
+    color: #FFD700;
+    text-shadow: 0 0 8px #FFD700, 0 0 15px #FFD700;
+    transform: scale(1.08);
+    animation: starGlow 2s ease-in-out infinite alternate, starSubtleBounce 1.5s ease-out infinite alternate;
+}
+
+.star-btn.starred svg {
+    fill: #FFD700 !important;
+    stroke: #FFD700;
+    filter: drop-shadow(0 0 8px #FFD700);
+    transition: fill 0.3s ease, filter 0.3s ease;
+}
+
+.star-btn.starred:hover {
+    color: #ffeb3b;
+    text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b;
+    transform: scale(1.15) translateY(-2px);
+    background-color: rgba(255, 215, 0, 0.1);
+}
+
+.star-btn.starred:hover svg {
+    fill: #ffeb3b !important;
+    stroke: #ffeb3b;
+    filter: drop-shadow(0 0 10px #ffeb3b);
+}
+
+@keyframes starGlow {
+    0% {
+        text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+    100% {
+        text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px rgba(255, 215, 0, 0.5);
+    }
+}
+
+@keyframes starSubtleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* --- Blue Medal: Best Button and Best Perspective --- */
+.best-btn {
+    color: #2196F3;
+}
+
+.best-perspective {
+    border-color: #2196F3;
+    box-shadow: 0 0 20px rgba(33, 150, 243, 0.3);
+}
+
+.action-btn.best-btn.active {
+    color: #2196F3;
+    background-color: rgba(33, 150, 243, 0.1);
+    border-color: #2196F3;
+    animation: bluePulse 2s ease-in-out infinite alternate;
+    box-shadow: 0 0 15px rgba(33, 150, 243, 0.5);
+}
+
+.action-btn.best-btn.active svg {
+    fill: #2196F3 !important;
+    stroke: #2196F3;
+    filter: drop-shadow(0 0 8px #2196F3);
+}
+
+@keyframes bluePulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(33, 150, 243, 0.5);
+    }
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 0 25px rgba(33, 150, 243, 0.7);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(33, 150, 243, 0.5);
+    }
+}
+
+/* --- Universal Active SVG Fix --- */
+.action-btn.star-btn.active svg,
+.action-btn.best-btn.active svg {
+    fill: currentColor !important;
+    stroke: currentColor;
+    filter: drop-shadow(0 0 8px currentColor);
+}
+
+/* --- Delete Button Styles --- */
+.delete-btn {
+    background-color: #F44336;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    border: 1px solid #F44336;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+    color: #fff;
+}
+
+.perspective-actions .delete-btn {
+    background: none;
+    border: none;
+    color: #F44336;
+    padding: 0.25rem 0.5rem;
+    font-size: 1rem;
+}
+
+.perspective-actions .delete-btn:hover {
+    background-color: rgba(244, 67, 54, 0.1); /* Light red background on hover */
+    color: #d32f2f; /* Darker red on hover */
+}
+
+
+/* --- Edit Form Styling (for perspectives - REPLACED) --- */
+.edit-form {
+    width: 100%;
+}
+
+.edit-form .edit-textarea {
+    width: 100%;
+    min-height: 100px;
+    background-color: var(--color-bg); /* Match main page background for a seamless look */
+    border: 1px solid var(--color-border);
+    border-radius: 6px; /* Adjusted from 4px */
+    padding: 0.75rem;
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    line-height: 1.7;
+    resize: vertical;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+}
+
+.edit-form .edit-textarea:focus {
+    outline: none;
+    border-color: var(--color-accent-cyan);
+    background-color: var(--color-surface); /* Adjusted from box-shadow */
+}
+
+.edit-form-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.edit-form-actions button { /* General button style for perspective edit form */
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px; /* Adjusted from 4px */
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.edit-form-actions .btn-cancel {
+    background: transparent;
+    color: var(--color-text-secondary);
+}
+
+.edit-form-actions .btn-cancel:hover {
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+}
+
+.edit-form-actions .btn-save {
+    background: var(--color-accent-cyan);
+    border-color: var(--color-accent-cyan);
+    color: #000;
+    font-weight: 700;
+}
+
+.edit-form-actions .btn-save:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+/* --- Edited Marker (UPDATED) --- */
+.edited-marker {
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    margin-left: 0.5rem;
+    font-style: italic; /* Added italic style */
+}
+
+/* --- Confirmation Modal Styles (NEW) --- */
+.confirm-delete-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top of everything */
+    backdrop-filter: blur(5px); /* Optional: adds a blur effect */
+}
+
+.confirm-delete-modal {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    animation: fadeInScale 0.3s ease-out forwards;
+}
+
+.confirm-delete-modal h3 {
+    font-size: 1.75rem;
+    color: #F44336; /* Red for emphasis */
+    margin-bottom: 1rem;
+}
+
+.confirm-delete-modal p {
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.modal-actions .btn-cancel,
+.modal-actions .btn-delete-confirm {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+}
+
+.modal-actions .btn-cancel {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+}
+
+.modal-actions .btn-cancel:hover {
+    background-color: var(--color-border);
+    color: var(--color-text-primary);
+}
+
+.modal-actions .btn-delete-confirm {
+    background-color: #F44336;
+    border: 1px solid #F44336;
+    color: #fff;
+}
+
+.modal-actions .btn-delete-confirm:hover {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- Media Queries for responsiveness (optional, but good practice) --- */
+@media (max-width: 768px) {
+    .dilemma-page-layout {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "content"
+            "sidebar"
+            "perspectives";
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .dilemma-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .perspectives-title {
+        font-size: 1.8rem;
+    }
+
+    .content-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .content-actions .action-btn,
+    .content-actions .delete-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

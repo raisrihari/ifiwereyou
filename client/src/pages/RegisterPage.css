@@ -1,0 +1,44 @@
+/* client/src/pages/RegisterPage.css */
+
+.fullscreen-form-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--color-bg);
+}
+
+/* We can re-use the form-container style from App.css, but let's add a footer style */
+.form-footer-text {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.back-home-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-home-link:hover {
+  color: var(--color-accent-cyan);
+}
+.api-error {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.5);
+  padding: 0.75rem;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* --- Input Error Styling --- */
+.input-group input.has-error {
+  border-color: #ff6b6b; /* The same soft red as the error text */
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+}

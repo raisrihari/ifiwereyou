@@ -1,0 +1,33 @@
+/* client/src/layouts/MainLayout.css */
+
+.main-layout-container {
+  display: flex;
+  height: calc(100vh - 71px); /* Full height minus the navbar */
+}
+
+.sidebar-wrapper {
+  width: 220px;
+  flex-shrink: 0;
+  
+  /* Animate the transform property for a smooth slide */
+  transform: translateX(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-wrapper.hidden {
+  /* This slides the sidebar completely out of view to the left */
+  transform: translateX(-220px);
+}
+
+.content-wrapper {
+  flex-grow: 1;
+  width: 100%;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 2rem;
+  
+  /* This transition will make the content area smoothly expand */
+  transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 0;
+}
+

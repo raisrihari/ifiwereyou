@@ -1,0 +1,99 @@
+/* client/src/pages/ProfilePage.css */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: var(--color-surface);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  margin-bottom: 2rem;
+}
+
+.profile-picture-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+.profile-picture {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-accent-cyan);
+}
+.picture-upload-label {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--color-text-primary);
+  color: var(--color-bg);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid var(--color-bg);
+  transition: all 0.2s ease;
+}
+.picture-upload-label:hover { background: var(--color-accent-cyan); }
+#pictureUpload { display: none; }
+
+.profile-info h2 { font-size: 2rem; margin: 0 0 0.5rem 0; }
+.profile-info p { margin: 0.25rem 0; color: var(--color-text-secondary); }
+
+
+.upload-form {
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid var(--color-accent-cyan);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+.upload-form p { margin: 0; font-weight: 500; }
+.upload-form .error-text { color: #ff6b6b; font-size: 0.9rem; }
+.upload-actions { display: flex; gap: 1rem; }
+
+.upload-actions button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.btn-cancel { background: var(--color-surface); color: var(--color-text-secondary); }
+.btn-cancel:hover { background: var(--color-border); color: var(--color-text-primary); }
+.btn-save { background: var(--color-accent-cyan); color: #000; font-weight: 700; border-color: var(--color-accent-cyan); }
+.btn-save:disabled { background: var(--color-text-secondary); cursor: not-allowed; }
+
+
+.profile-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-count {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  display: block;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}

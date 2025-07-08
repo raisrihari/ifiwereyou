@@ -1,0 +1,105 @@
+/* client/src/pages/SharePage.css */
+
+.share-page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.share-page-header h1 { font-size: 3rem; }
+.share-page-header .subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  max-width: 550px;
+  margin: 0.5rem auto 0 auto;
+}
+
+.content-area {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* --- Logged-Out Prompt Styles --- */
+.share-prompt {
+  text-align: center;
+  background: var(--color-surface);
+  padding: 3rem;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+}
+.share-prompt h2 { font-size: 1.8rem; margin-bottom: 1rem; color: #FFFFFF; }
+.share-prompt p { font-size: 1.1rem; line-height: 1.7; color: var(--color-text-primary); opacity: 0.8; margin-bottom: 2rem; }
+.prompt-actions { display: flex; justify-content: center; gap: 1rem; }
+.btn-prompt {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  transition: all 0.2s ease;
+}
+.btn-prompt:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+.btn-prompt.primary {
+  background: var(--color-accent-cyan);
+  border-color: var(--color-accent-cyan);
+  color: #000;
+  font-weight: 700;
+}
+
+/* --- Logged-In Form Styles --- */
+.story-form { background: var(--color-surface); padding: 2rem; border-radius: 8px; border: 1px solid var(--color-border); }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label, .form-group-inline label { font-weight: 500; display: block; margin-bottom: 0.75rem; color: var(--color-text-primary); }
+.form-group input[type="text"], .form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  font-family: var(--font-body);
+  transition: all 0.2s ease;
+}
+.form-group input[type="text"]:focus, .form-group textarea:focus { outline: none; border-color: var(--color-accent-cyan); box-shadow: 0 0 10px rgba(0,255,255,0.2); }
+.form-group textarea { resize: vertical; }
+
+.worlds-checkbox-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+.world-checkbox {
+  display: flex;
+  align-items: center;
+  background: var(--color-bg);
+  padding: 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+}
+.world-checkbox:hover { border-color: var(--color-accent-cyan); }
+.world-checkbox input { margin-right: 0.75rem; }
+
+.form-group-inline { display: flex; align-items: center; }
+.anonymous-checkbox { display: flex; align-items: center; cursor: pointer; }
+.anonymous-checkbox input { margin-right: 0.5rem; }
+
+.submit-story-btn {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-accent-blue);
+  color: #000;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+}
+.submit-story-btn:hover { filter: brightness(1.2); box-shadow: 0 0 20px var(--color-accent-blue); }
+.error-text { color: #ff6b6b; margin-top: 0.5rem; }

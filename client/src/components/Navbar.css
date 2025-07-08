@@ -1,0 +1,340 @@
+/* client/src/components/Navbar.css - FINAL VERSION (Layout + Holographic Hover) */
+
+/* --- Main Container & Layout --- */
+.navbar-container {
+    background: #0D0D0D;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.nav-center-block {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.main-nav, .secondary-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* --- Logo & Brand --- */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.menu-toggle-btn {
+    background: none; border: none; color: var(--color-text-secondary);
+    cursor: pointer; padding: 0.5rem; border-radius: 50%; display: flex;
+}
+.menu-toggle-btn:hover { background-color: var(--color-surface); color: var(--color-text-primary); }
+.nav-brand-link { display: flex; align-items: center; text-decoration: none; }
+.logo {
+    filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.4));
+    transition: all 0.3s ease;
+}
+.brand-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700;
+    background: linear-gradient(45deg, #00FFFF, #FF00FF, #FFFF00);
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.3); margin: 0; line-height: 1;
+}
+.nav-brand-link:hover .logo {
+    filter: drop-shadow(0 0 16px rgba(0, 255, 255, 0.7));
+    transform: scale(1.05);
+}
+
+/* --- Search Bar (UPDATED & NEW STYLES) --- */
+.search-container {
+    position: relative;
+    width: 450px; /* Original width */
+    display: flex; /* Ensure it can contain the form */
+    align-items: center;
+}
+
+.search-form {
+    display: flex; /* Arrange input and button side-by-side */
+    align-items: center;
+    width: 100%; /* Make the form take full width of its container */
+    background-color: rgba(0, 0, 0, 0.2); /* Original input background */
+    border: 1px solid var(--color-border);
+    border-radius: 8px; /* Match other rounded elements */
+    overflow: hidden; /* Ensures the border-radius applies to children */
+    transition: all 0.2s ease;
+}
+
+.search-form:focus-within {
+    border-color: var(--color-accent-cyan);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2); /* Original input focus shadow */
+}
+
+.search-input {
+    flex-grow: 1; /* Allows input to take up available space */
+    padding: 0.8rem 1rem; /* Original input padding */
+    border: none; /* Remove individual border as form handles it */
+    background-color: transparent; /* Inherit from parent form */
+    color: #EDEDED; /* Original input color */
+    font-size: 1rem;
+    font-family: var(--font-body);
+    outline: none; /* Remove focus outline */
+    /* width: 100%; Removed as flex-grow handles it within the form */
+    transition: all 0.3s ease; /* Keep transition */
+}
+
+.search-input::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 0.7;
+}
+
+/* REMOVED: .search-icon is no longer needed as the icon is inside the button */
+/* .search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary); } */
+
+/* Style for the new search button */
+.search-button {
+    background-color: transparent; /* Match form background, or set a subtle color */
+    border: none;
+    padding: 0.8rem 1rem; /* Adjust padding to align with input */
+    cursor: pointer;
+    color: var(--color-text-secondary); /* Icon color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.search-button:hover {
+    background-color: rgba(0, 255, 255, 0.05); /* A subtle hover background matching NavLink */
+    color: #FFFFFF; /* Change icon color on hover to white */
+}
+
+.search-button:active {
+    transform: translateY(1px); /* Slight press effect */
+}
+
+.search-button svg {
+    /* Styles for the Lucide Search icon within the button */
+    stroke-width: 2; /* Adjust icon thickness */
+}
+
+
+/*
+--- HOLOGRAPHIC NAV ITEMS (THE CORE FIX) ---
+This applies to .nav-item and .auth-link
+*/
+.nav-item, .auth-link {
+    /* Positioning & Layout */
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    
+    /* Text & Decoration */
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    
+    /* Box & Transitions */
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: transparent; /* Start with no background */
+    transition: color 0.4s ease, background-color 0.4s ease;
+}
+
+/* The Holographic Scanner Line */
+.nav-item::before, .auth-link::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        0deg, transparent, transparent 40%, rgba(0, 255, 255, 0.4), transparent 60%, transparent
+    );
+    transform: rotate(-45deg);
+    opacity: 0;
+    z-index: 1; /* Below the text */
+    transition: all 0.5s ease;
+}
+
+/* Ensure text and icons are on top of the scanner */
+.nav-item > span, .auth-link > span, .auth-link > svg {
+    z-index: 2;
+    position: relative;
+}
+
+/* The Hover Interaction */
+.nav-item:hover, .auth-link:hover {
+    color: #FFFFFF;
+    background-color: rgba(0, 255, 255, 0.05); /* Add the faint box color on hover */
+}
+
+.nav-item:hover::before, .auth-link:hover::before {
+    opacity: 1;
+    transform: rotate(-45deg) translateY(45%);
+}
+
+.nav-item.active {
+    color: #FFFFFF;
+    font-weight: 700;
+    background-color: rgba(0, 255, 255, 0.08);
+}
+
+
+/*
+--- THE "CLUBBED" AUTH LINKS (THE SECOND CORE FIX) ---
+*/
+/* --- THE "CLUBBED" AUTH LINKS --- */
+.auth-links {
+    display: flex; /* THIS IS THE KEY FIX */
+    align-items: center; /* This vertically centers the items inside */
+    
+    /* The rest of the styles are for the container's appearance */
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden; 
+}
+.auth-section { /* This class seems unused based on Navbar.js, but keeping for reference */
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-border); /* The outer container */
+    border-radius: 8px;
+    overflow: hidden; /* Crucial for clipping corners */
+}
+
+/* Remove individual padding/margin from the links themselves */
+.auth-links .auth-link {
+    padding: 0.75rem 1rem;
+    margin: 0;
+    border-radius: 0;
+}
+
+/* The divider line */
+.auth-links .login-link {
+    border-right: 1px solid var(--color-border);
+}
+
+/* Specific styling for the Sign Up button to make it look different */
+.auth-links .signup-link {
+    background-color: rgba(0, 255, 255, 0.1);
+}
+
+.auth-links .signup-link:hover {
+    background-color: rgba(0, 255, 255, 0.2);
+}
+
+
+/* Ensure the new profile link has the same base styles */
+.profile-link {
+    border-right: 1px solid var(--color-border);
+}
+
+/* Make the logout button look and feel like its neighbors */
+.logout-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+    /* Inherit all the styles from .auth-link so it matches */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: var(--color-text-primary); /* Use the bright text color */
+    font-family: inherit;
+    font-size: 0.95rem; /* Match the font size of other links */
+    font-weight: 500;
+    
+    /* Added the holographic pseudo-element for consistency */
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.logout-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        0deg, transparent, transparent 40%, rgba(255, 107, 107, 0.5), transparent 60%, transparent
+    );
+    transform: rotate(-45deg);
+    opacity: 0;
+    z-index: 1;
+    transition: all 0.5s ease;
+}
+
+.logout-button:hover {
+    color: #ff6b6b; /* The red hover color */
+    background-color: rgba(255, 107, 107, 0.1);
+}
+
+.logout-button:hover::before {
+    opacity: 1;
+    transform: rotate(-45deg) translateY(45%);
+}
+
+.logout-button > span, .logout-button > svg {
+    z-index: 2;
+    position: relative;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .search-input {
+        /* Adjusted width for input within the form */
+        width: 100px;
+    }
+    .search-form {
+        width: 100%; /* Allow form to take full width */
+    }
+
+    /* Adjust main nav for smaller screens */
+    .nav-center-block {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .main-nav, .secondary-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .nav-container {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        align-items: flex-start;
+    }
+    .nav-brand {
+        margin-bottom: 1rem;
+    }
+    .navbar-right {
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: center; /* Center auth links on small screens */
+    }
+}

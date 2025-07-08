@@ -1,0 +1,100 @@
+/* client/src/components/LeftMenu.css */
+
+.left-menu-container {
+  width: 100%; /* Take up the full width of its parent (.sidebar-wrapper) */
+  height: 100%;
+  position: relative;
+  padding-top: 1.5rem;
+  overflow-y: auto; /* Allow scrolling if content is too long */
+  background-color: var(--color-bg); /* Match the body background */
+}
+
+/* Scrollbar styling for a cleaner look in Webkit browsers */
+.left-menu-container::-webkit-scrollbar {
+  width: 4px;
+}
+.left-menu-container::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 10px;
+}
+.left-menu-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.menu-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-section-title {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px; /* TIGHTER SPACING */
+  color: var(--color-text-secondary);
+  padding: 0 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.35rem 1rem;
+  margin: 0.1rem 0.5rem; /* INCREASED vertical margin */
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+/* Different styling for main nav vs sub-nav */
+.main-nav-item {
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+}
+.sub-nav-item {
+  color: var(--color-text-primary);
+  font-size: 0.85rem;
+}
+
+/* Shared hover effect */
+.menu-item:hover {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+}
+.menu-item:hover svg {
+  color: var(--color-accent-cyan);
+}
+
+/* The style for the currently active link */
+.menu-item.active {
+  background-color: rgba(0, 255, 255, 0.08);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+.menu-item.active svg {
+  color: var(--color-accent-cyan);
+  filter: drop-shadow(0 0 5px var(--color-accent-cyan));
+}
+
+.menu-item svg {
+  flex-shrink: 0; /* Prevent icon from shrinking */
+  transition: all 0.2s ease;
+  color: var(--color-text-secondary);
+}
+
+.main-nav-item.active svg {
+  color: var(--color-accent-cyan);
+}
+
+
+.menu-divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: 1rem 0.5rem;
+}
