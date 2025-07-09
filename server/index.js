@@ -12,7 +12,7 @@ const app = express();
 
 // --- Middleware ---
 // 1. CORS: Allow requests from your Netlify domain and localhost
-const whitelist = ['http://localhost:3000', 'https://your-app-name.netlify.app']; // IMPORTANT: REPLACE WITH YOUR NETLIFY URL
+const whitelist = ['http://localhost:3000', 'https://ifiwereyou.netlify.app']; // IMPORTANT: REPLACE WITH YOUR NETLIFY URL
 const corsOptions = {
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or Postman)
