@@ -24,35 +24,16 @@ router.post('/', auth, async (req, res) => {
 });
 
 // --- 2. READ all dilemmas (with filtering) ---
+// In server/routes/dilemmas.js
+
 router.get('/', async (req, res) => {
     try {
-        let query = {};
-        const { category, tag, world } = req.query;
-
-        if (tag) {
-            query.tags = { $regex: `^${tag}$`, $options: 'i' };
-        } else if (category) {
-            query.categories = { $regex: `^${category}$`, $options: 'i' };
-        } else if (world) {
-            let worldCategories = [];
-            if (world === 'crossroads') {
-                worldCategories = ['I Need Advice', 'It\'s My Opinion', 'Change My Mind'];
-            } else if (world === 'sandbox') {
-                worldCategories = ['Hypothetical', 'Fiction', 'Imaginary', 'What If...'];
-            } else if (world === 'engine') {
-                worldCategories = ['Dream Machine', 'Writer\'s Block', 'Why Do You Think?'];
-            }
-            query.categories = { $in: worldCategories };
-        }
-        
-        const dilemmas = await Dilemma.find(query)
-            .populate('author', 'username')
-            .sort({ createdAt: -1 });
-        
+        console.log("--- RUNNING SIMPLIFIED GET / ROUTE ---");
+        // This is a very basic query with no population.
+        const dilemmas = await Dilemma.find({}).sort({ createdAt: -1 });
         res.json(dilemmas);
-
     } catch (error) {
-        console.error(error.message);
+        console.error("Simple GET / route failed:", error.message);
         res.status(500).send('Server Error');
     }
 });
