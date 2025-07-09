@@ -10,20 +10,7 @@ connectDB();
 
 const app = express();
 
-// --- Middleware ---
-// 1. CORS: Allow requests from your Netlify domain and localhost
-const whitelist = ['http://localhost:3000', 'https://ifiwereyou.netlify.app']; // IMPORTANT: REPLACE WITH YOUR NETLIFY URL
-const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or Postman)
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
 // 2. Body Parser for JSON
 app.use(express.json({ extended: false }));
