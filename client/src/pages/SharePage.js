@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import './SharePage.css'; 
-axios.defaults.baseURL = 'https://ifiwereyou-api.onrender.com'; 
+axios.defaults.baseURL = 'https://ifiwereyou.onrender.com'; 
 // --- The Form Component (for logged-in users) ---
 const StoryForm = () => {
   const navigate = useNavigate();

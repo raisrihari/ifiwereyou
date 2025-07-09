@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { Star, Award, Edit, Trash2 } from 'lucide-react';
 import './DilemmaPage.css';
-axios.defaults.baseURL = 'https://ifiwereyou-api.onrender.com'; 
+axios.defaults.baseURL = 'https://ifiwereyou.onrender.com'; 
 const DilemmaPage = () => {
     // --- STATE AND HOOKS ---
     const [dilemma, setDilemma] = useState(null);

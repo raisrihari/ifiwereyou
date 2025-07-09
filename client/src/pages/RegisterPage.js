@@ -7,7 +7,7 @@ import Logo from '../components/Logo';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import './AuthPage.css';
-axios.defaults.baseURL = 'https://ifiwereyou-api.onrender.com'; 
+axios.defaults.baseURL = 'https://ifiwereyou.onrender.com'; 
 const RegisterPage = () => {
   // We no longer need the error from useAuth, we'll handle our own.
   const { login } = useAuth();

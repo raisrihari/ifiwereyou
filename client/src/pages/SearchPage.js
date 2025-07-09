@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import DilemmaCard from '../components/DilemmaCard';
 import './HomePage.css';
-axios.defaults.baseURL = 'https://ifiwereyou-api.onrender.com'; 
+axios.defaults.baseURL = 'https://ifiwereyou.onrender.com'; 
 const SearchPage = () => {
     const [dilemmas, setDilemmas] = useState([]);
     const [loading, setLoading] = useState(false);

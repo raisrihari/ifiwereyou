@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Camera } from 'lucide-react';
 import DilemmaCard from '../components/DilemmaCard'; // Re-use our card component!
 import './ProfilePage.css';
-axios.defaults.baseURL = 'https://ifiwereyou-api.onrender.com'; 
+axios.defaults.baseURL = 'https://ifiwereyou.onrender.com'; 
 const ProfilePage = () => {
     // Get the full user object, loading state, and the loadUser function from context
     const { user, loading, loadUser } = useAuth();
