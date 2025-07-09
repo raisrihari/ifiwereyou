@@ -1,0 +1,50 @@
+# render.yaml
+
+services:
+  # ------------------
+  # The Back-End Server
+  # ------------------
+  - type: web # This is a web service that runs a server
+    name: ifiwereyou-api # The name of your service on Render
+    runtime: node # Specify the environment
+    repo: https://github.com/raisrihari/ifiwereyou # IMPORTANT: Use your repo URL
+    branch: main # The branch to deploy from
+    
+    # --- Build and Start Commands ---
+    # These commands are run from the 'rootDir'
+    rootDir: server # Tell Render to look inside the 'server' folder
+    buildCommand: "npm install"
+    startCommand: "npm start"
+
+    # --- Environment Variables ---
+    # This is where your secrets go.
+    # It's better to add these in the Render Dashboard's "Environment" tab
+    # for security, but you can define non-secret ones here.
+    # For now, we will add them via the dashboard.
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  # ---------------------
+  # The Front-End Client (Example for deploying to Render, we will use Netlify instead)
+  # ---------------------
+  # We are keeping this commented out because we are deploying our front-end to Netlify.
+  # If you wanted to deploy everything on Render, you would uncomment this section.
+  #
+  # - type: static # This is a static site with no server-side code
+  #   name: ifiwereyou-client
+  #   repo: https://github.com/raisrihari/ifiwereyou
+  #   branch: main
+  #
+  #   # --- Build and Publish Commands ---
+  #   rootDir: client # Look inside the 'client' folder
+  #   buildCommand: "npm install && npm run build"
+  #   publishDir: "build" # The folder that contains the final static files
+  #
+  #   # --- Rewrites/Redirects ---
+  #   # This is crucial for single-page apps like React. It ensures that
+  #   # if a user refreshes on /profile, they don't get a 404 error.
+  #   routes:
+  #     - type: rewrite
+  #       source: /*
+  #       destination: /index.html
