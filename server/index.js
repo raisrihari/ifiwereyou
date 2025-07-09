@@ -3,7 +3,6 @@
 const express = require('express');
 const path = require('path'); // Add this line
 const connectDB = require('./config/db');
-const cors = require('cors'); // Add this line
 require('dotenv').config();
 
 connectDB();
