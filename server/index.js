@@ -31,16 +31,6 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/dilemmas', require('./routes/dilemmas'));
 app.use('/api/perspectives', require('./routes/perspectives'));
 
-// --- Serve static assets in production ---
-if (process.env.NODE_ENV === 'production') {
-    // Set static folder
-    app.use(express.static('client/build'));
-
-    // Serve the React app for any route not handled by the API
-    app.get('/', (req, res) => {
-    res.send('API is running...');
-});
-}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
