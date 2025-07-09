@@ -1,11 +1,14 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build-client": "cd ../client && npm install && npm run build",
-    "render-build": "npm run build-client"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "22.17.0"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
