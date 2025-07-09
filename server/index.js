@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 
     // Serve the React app for any route not handled by the API
-    app.get('/{*splat}', (req, res) => {
+    app.get('/{*any}', (req, res) => {
        res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
     });
 }
