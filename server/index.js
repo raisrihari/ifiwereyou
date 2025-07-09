@@ -10,7 +10,21 @@ connectDB();
 const app = express();
 
 // --- MIDDLEWARE ---
-app.use(cors()); // Enable CORS for all routes
+const cors = require('cors'); // Make sure this import is at the top
+
+// --- CORS Configuration ---
+// This tells our server to only accept requests from our live Netlify site.
+const whitelist = ['http://localhost:3000', 'https://ifiwereyou.netlify.app'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+app.use(cors(corsOptions));
 app.use(express.json({ extended: false }));
 
 // --- API ROUTES ---
