@@ -3,8 +3,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-axios.defaults.baseURL = API_URL;
+axios.defaults.baseURL = 'https://ifiwereyou-api.onrender.com'; 
 const setAuthToken = token => {
   if (token) {
     axios.defaults.headers.common['x-auth-token'] = token;
