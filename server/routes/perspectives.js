@@ -1,13 +1,11 @@
-// server/routes/perspectives.js
-
 const express = require('express');
 const router = express.Router();
 
 const auth = require('../middleware/auth');
-const Dilemma = require('../models/Dilemma'); // Make sure Dilemma model is imported
+const Dilemma = require('../models/Dilemma');
 const Perspective = require('../models/Perspective');
-const User = require('../models/User'); // Assuming User model is needed elsewhere in this file
 
+// --- CREATE a new perspective ---
 router.post('/:dilemmaId', auth, async (req, res) => {
     const { text, isAnonymous } = req.body;
 
@@ -25,13 +23,12 @@ router.post('/:dilemmaId', auth, async (req, res) => {
             text,
             isAnonymous: isAnonymous || false,
             author: req.user.id,
-            dilemma: req.params.dilemmaId // Ensure the dilemma ID is stored with the perspective
+            dilemma: req.params.dilemmaId
         });
 
         const perspective = await newPerspective.save();
 
-        // Add the new perspective's ID to the dilemma's perspectives array
-        dilemma.perspectives.unshift(perspective.id);
+        dilemma.perspectives.unshift(perspective._id); // safer to use _id
         await dilemma.save();
 
         res.status(201).json(perspective);
@@ -42,6 +39,7 @@ router.post('/:dilemmaId', auth, async (req, res) => {
     }
 });
 
+// --- EDIT a perspective ---
 router.put('/:id', auth, async (req, res) => {
     const { text } = req.body;
     if (!text) return res.status(400).json({ msg: 'Text is required.' });
@@ -51,16 +49,17 @@ router.put('/:id', auth, async (req, res) => {
         if (!perspective) {
             return res.status(404).json({ msg: 'Perspective not found.' });
         }
-        // Ensure the user editing is the author of the perspective
+
         if (perspective.author.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'User not authorized.' });
         }
-        
+
         perspective = await Perspective.findByIdAndUpdate(
             req.params.id,
-            { $set: { text: text, isEdited: true } },
-            { new: true } // Return the updated document
+            { $set: { text, isEdited: true } },
+            { new: true }
         );
+
         res.json(perspective);
     } catch (error) {
         console.error(error.message);
@@ -68,34 +67,32 @@ router.put('/:id', auth, async (req, res) => {
     }
 });
 
+// --- STAR / UNSTAR a perspective ---
 router.put('/star/:id', auth, async (req, res) => {
     try {
         const perspective = await Perspective.findById(req.params.id);
-
         if (!perspective) {
             return res.status(404).json({ msg: 'Perspective not found.' });
         }
 
-        // Check if the user's ID is already in the array
-        const userIndex = perspective.starredBy.indexOf(req.user.id);
+        const userId = req.user.id;
+        const index = perspective.starredBy.map(id => id.toString()).indexOf(userId);
 
-        if (userIndex === -1) {
-            // User has NOT starred it yet. Add them to the array.
-            perspective.starredBy.push(req.user.id);
-            await perspective.save();
-            return res.json(perspective.starredBy); // Return the updated array
+        if (index === -1) {
+            perspective.starredBy.push(userId);
         } else {
-            // User HAS starred it. Remove them from the array.
-            perspective.starredBy.splice(userIndex, 1);
-            await perspective.save();
-            return res.json(perspective.starredBy); // Return the updated array
+            perspective.starredBy.splice(index, 1);
         }
+
+        await perspective.save();
+        res.json(perspective.starredBy);
     } catch (error) {
         console.error(error.message);
         res.status(500).send('Server Error');
     }
 });
 
+// --- MARK / UNMARK BEST ---
 router.put('/best/:id', auth, async (req, res) => {
     try {
         const perspective = await Perspective.findById(req.params.id);
@@ -103,18 +100,15 @@ router.put('/best/:id', auth, async (req, res) => {
             return res.status(404).json({ msg: 'Perspective not found.' });
         }
 
-        // Find the parent dilemma to verify the author
         const dilemma = await Dilemma.findById(perspective.dilemma);
         if (!dilemma) {
-            return res.status(404).json({ msg: 'Parent dilemma not found for this perspective.' });
+            return res.status(404).json({ msg: 'Parent dilemma not found.' });
         }
 
-        // Ensure the logged-in user is the author of the dilemma
         if (dilemma.author.toString() !== req.user.id) {
-            return res.status(401).json({ msg: 'User not authorized to mark best for this dilemma.' });
+            return res.status(401).json({ msg: 'User not authorized.' });
         }
 
-        // Toggle the 'isMarkedBest' status
         perspective.isMarkedBest = !perspective.isMarkedBest;
         await perspective.save();
 
@@ -126,6 +120,7 @@ router.put('/best/:id', auth, async (req, res) => {
     }
 });
 
+// --- DELETE a perspective ---
 router.delete('/:id', auth, async (req, res) => {
     try {
         const perspective = await Perspective.findById(req.params.id);
@@ -133,23 +128,19 @@ router.delete('/:id', auth, async (req, res) => {
             return res.status(404).json({ msg: 'Perspective not found.' });
         }
 
-        // Ensure the user deleting is the author of the perspective
         if (perspective.author.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'User not authorized.' });
         }
 
-        // Get the parent dilemma to remove the perspective reference
         const dilemma = await Dilemma.findById(perspective.dilemma);
         if (dilemma) {
             dilemma.perspectives = dilemma.perspectives.filter(
-                (pId) => pId.toString() !== req.params.id
+                (pId) => pId.toString() !== perspective._id.toString()
             );
             await dilemma.save();
         }
 
-        // Delete the perspective document itself
-        await perspective.deleteOne(); // Mongoose v6+ uses deleteOne()
-
+        await perspective.deleteOne();
         res.json({ msg: 'Perspective removed.' });
 
     } catch (error) {
