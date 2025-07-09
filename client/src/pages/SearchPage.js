@@ -5,7 +5,8 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import DilemmaCard from '../components/DilemmaCard';
 import './HomePage.css';
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+axios.defaults.baseURL = API_URL;
 const SearchPage = () => {
     const [dilemmas, setDilemmas] = useState([]);
     const [loading, setLoading] = useState(false);

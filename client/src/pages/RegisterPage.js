@@ -7,7 +7,8 @@ import Logo from '../components/Logo';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import './AuthPage.css';
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+axios.defaults.baseURL = API_URL;
 const RegisterPage = () => {
   // We no longer need the error from useAuth, we'll handle our own.
   const { login } = useAuth();

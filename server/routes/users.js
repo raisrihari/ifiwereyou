@@ -129,7 +129,7 @@ router.post('/upload-picture', auth, upload.single('profilePicture'), async (req
  * @route   GET /api/users/profile/:username
  * @desc    Get a user's public profile and non-anonymous dilemmas
  * @access  Public
- */
+
 router.get('/profile/:username', async (req, res) => {
     try {
         const user = await User.findOne({
@@ -150,5 +150,5 @@ router.get('/profile/:username', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
-
+ */
 module.exports = router;

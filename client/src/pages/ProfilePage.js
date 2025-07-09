@@ -6,7 +6,8 @@ import axios from 'axios';
 import { Camera } from 'lucide-react';
 import DilemmaCard from '../components/DilemmaCard'; // Re-use our card component!
 import './ProfilePage.css';
-
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+axios.defaults.baseURL = API_URL;
 const ProfilePage = () => {
     // Get the full user object, loading state, and the loadUser function from context
     const { user, loading, loadUser } = useAuth();
